@@ -123,7 +123,7 @@ function initLocalStorage() {
         linkedin: 'https://linkedin.com/company/goodlookpouch',
         youtube: 'https://youtube.com/@goodlookpouch',
         footerMessage: 'Premium pouch manufacturing with zero setup costs and fast turnaround.',
-        footerCopyright: '© 2024 GoodLook Pouch. All rights reserved.'
+        footerCopyright: '© 2026 GoodLook Pouch. All rights reserved.'
     };
 
     // Load data from localStorage or use defaults

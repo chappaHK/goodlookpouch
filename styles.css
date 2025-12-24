@@ -257,6 +257,13 @@ button {
     color: white;
     max-width: 100%;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .carousel-title {
@@ -384,19 +391,22 @@ button {
     cursor: pointer;
     transition: all 0.3s ease;
     z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .carousel-controls:hover {
     background: rgba(255,255,255,0.3);
 }
 
-.carousel-prev {
-    left: 20px;
-}
+    .carousel-prev {
+        left: 10px;
+    }
 
-.carousel-next {
-    right: 20px;
-}
+    .carousel-next {
+        right: 10px;
+    }
 
 .carousel-indicators {
     position: absolute;
@@ -1261,10 +1271,23 @@ button {
         border-radius: 12px;
         width: 100%;
         max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .carousel-overlay {
+        padding: 1.5rem 1rem 1rem;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
     }
 
     .carousel-title {
-        font-size: 2rem;
+        font-size: 1.5rem;
+        line-height: 1.2;
+        margin-bottom: 0;
+        text-align: center;
+        width: 100%;
     }
 
     .carousel-description {
@@ -1296,14 +1319,51 @@ button {
 }
 
 @media (max-width: 576px) {
+    .hero-carousel {
+        height: 180px;
+        margin-bottom: 3rem;
+        border-radius: 8px;
+        width: calc(100% - 1rem);
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+
     .carousel-overlay {
-        padding: 3rem 2rem 2rem;
-        max-width: 100%;
+        padding: 1rem 1rem 0.75rem;
+        background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+        align-items: center;
+        justify-content: center;
+        text-align: center;
     }
 
     .carousel-title {
-        font-size: 2.5rem;
+        font-size: 1.25rem;
+        line-height: 1.1;
+        margin-bottom: 0;
+        text-align: center;
+        width: 100%;
         max-width: 100%;
+        word-wrap: break-word;
+        padding: 0 0.5rem;
+        box-sizing: border-box;
+    }
+
+    .carousel-controls {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        top: 45%;
+    }
+
+    .carousel-indicators {
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .indicator {
+        width: 8px;
+        height: 8px;
     }
 
     .carousel-description {
@@ -2497,6 +2557,57 @@ input.invalid {
     .hero-container {
         padding: 0 1rem;
         gap: 2rem;
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero-content {
+        text-align: center;
+    }
+
+    .hero-badge {
+        justify-content: center;
+        margin: 0 auto 2rem;
+    }
+
+    .hero-metrics {
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .hero-actions {
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .cta-button {
+        width: 100%;
+        justify-content: center;
+        padding: 1rem 2rem;
+    }
+
+    .hero-trust {
+        justify-content: center;
+    }
+
+    .trust-badges {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .hero-visual {
+        order: -1;
+        margin-bottom: 2rem;
+    }
+
+    .visual-container {
+        max-width: 400px;
+        margin: 0 auto;
     }
 
     .hero-heading {
@@ -2569,6 +2680,11 @@ input.invalid {
 
     .floating-elements {
         display: none;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
     }
 
     .features-title,
