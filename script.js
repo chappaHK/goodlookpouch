@@ -144,9 +144,16 @@ function initLocalStorage() {
     function updateUI() {
         const data = loadData();
 
-        // Update contact buttons
-        document.getElementById('whatsapp-btn').href = `https://wa.me/${data.whatsapp.replace(/\D/g, '')}`;
-        document.getElementById('call-btn').href = `tel:${data.phone}`;
+        // Update floating contact buttons
+        const whatsappBtn = document.getElementById('floating-whatsapp-btn');
+        const callBtn = document.getElementById('floating-call-btn');
+
+        if (whatsappBtn) {
+            whatsappBtn.href = `https://wa.me/${data.whatsapp.replace(/\D/g, '')}`;
+        }
+        if (callBtn) {
+            callBtn.href = `tel:${data.phone}`;
+        }
 
         // Update contact page
         document.getElementById('contact-address').textContent = data.address;
@@ -312,6 +319,62 @@ function initFAQ() {
             item.classList.toggle('active');
         });
     });
+}
+
+// MOBILE COMPATIBILITY IMPROVEMENTS
+function initMobileCompatibility() {
+    // Fix viewport height issues on mobile Safari
+    function setVH() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+
+    setVH();
+    window.addEventListener('resize', setVH);
+    window.addEventListener('orientationchange', () => {
+        setTimeout(setVH, 100);
+    });
+
+    // Prevent zoom on double tap
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', (event) => {
+        const now = Date.now();
+        if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+        }
+        lastTouchEnd = now;
+    }, false);
+
+    // Better mobile scrolling
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+
+    // Improve mobile performance
+    let ticking = false;
+    function updateMobileOptimizations() {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                // Mobile-specific optimizations can go here
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+
+    window.addEventListener('scroll', updateMobileOptimizations, { passive: true });
+    window.addEventListener('touchmove', updateMobileOptimizations, { passive: true });
+
+    // Detect mobile devices for specific behaviors
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (isMobile) {
+        document.body.classList.add('is-mobile');
+    }
+
+    // Handle iOS Safari bottom bar
+    if (navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('Chrome')) {
+        document.body.classList.add('ios-safari');
+    }
 }
 
 // ENHANCED CUSTOMER EXPERIENCE FEATURES
@@ -527,8 +590,91 @@ function initEnhancedUX() {
     }, 3000);
 }
 
+// MOBILE MENU FUNCTIONALITY
+function initMobileMenu() {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navOverlay = document.getElementById('nav-overlay');
+    const mobileNav = document.getElementById('mobile-nav');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+    if (!mobileMenuToggle || !navOverlay || !mobileNav) return;
+
+    // Toggle mobile menu
+    function toggleMobileMenu() {
+        const isActive = mobileMenuToggle.classList.contains('active');
+
+        if (isActive) {
+            closeMobileMenu();
+        } else {
+            openMobileMenu();
+        }
+    }
+
+    function openMobileMenu() {
+        mobileMenuToggle.classList.add('active');
+        mobileMenuToggle.setAttribute('aria-expanded', 'true');
+        navOverlay.classList.add('active');
+        mobileNav.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+        mobileMenuToggle.classList.remove('active');
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        navOverlay.classList.remove('active');
+        mobileNav.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Event listeners
+    mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+
+    // Close menu when clicking overlay
+    navOverlay.addEventListener('click', (e) => {
+        if (e.target === navOverlay) {
+            closeMobileMenu();
+        }
+    });
+
+    // Close menu when clicking nav links
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            closeMobileMenu();
+            // Small delay to allow menu to close before navigation
+            setTimeout(() => {
+                const sectionId = link.getAttribute('href').substring(1);
+                showSection(sectionId);
+                history.pushState(null, null, `#${sectionId}`);
+            }, 300);
+        });
+    });
+
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileMenuToggle.classList.contains('active')) {
+            closeMobileMenu();
+        }
+    });
+
+    // Update mobile nav active state
+    function updateMobileNavActive() {
+        const currentSection = location.hash.substring(1) || 'home';
+        mobileNavLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${currentSection}`) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    // Update on navigation changes
+    window.addEventListener('hashchange', updateMobileNavActive);
+    updateMobileNavActive();
+}
+
 // INITIALIZE EVERYTHING
 document.addEventListener('DOMContentLoaded', () => {
+    initMobileCompatibility();
     initNavigation();
     initCarousel();
     const storage = initLocalStorage();
@@ -537,4 +683,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initKeyboardNavigation();
     initFAQ();
     initEnhancedUX();
+    initMobileMenu();
 });
