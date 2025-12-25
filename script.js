@@ -350,20 +350,20 @@ function initMobileCompatibility() {
         history.scrollRestoration = 'manual';
     }
 
-    // Improve mobile performance
+    // Improve mobile performance with throttled scroll handling
     let ticking = false;
-    function updateMobileOptimizations() {
+    const throttledScroll = () => {
         if (!ticking) {
             requestAnimationFrame(() => {
-                // Mobile-specific optimizations can go here
+                // Performance optimizations can be added here if needed
                 ticking = false;
             });
             ticking = true;
         }
-    }
+    };
 
-    window.addEventListener('scroll', updateMobileOptimizations, { passive: true });
-    window.addEventListener('touchmove', updateMobileOptimizations, { passive: true });
+    // Use single scroll listener for better performance
+    window.addEventListener('scroll', throttledScroll, { passive: true });
 
     // Detect mobile devices for specific behaviors
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -379,42 +379,53 @@ function initMobileCompatibility() {
 
 // ENHANCED CUSTOMER EXPERIENCE FEATURES
 function initEnhancedUX() {
-    // Reading Progress Bar
+    // Combined scroll handler for better performance
     const progressBar = document.querySelector('.progress-bar');
     const readingProgress = document.querySelector('.reading-progress');
-
-    function updateProgressBar() {
-        const scrollTop = window.pageYOffset;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const scrollPercent = (scrollTop / docHeight) * 100;
-
-        if (progressBar) progressBar.style.width = scrollPercent + '%';
-
-        // Show/hide progress bar based on scroll position
-        if (readingProgress) {
-            if (scrollTop > 100) {
-                readingProgress.classList.add('visible');
-            } else {
-                readingProgress.classList.remove('visible');
-            }
-        }
-    }
-
-    window.addEventListener('scroll', updateProgressBar);
-    updateProgressBar();
-
-    // Scroll to Top Button
     const scrollToTopBtn = document.querySelector('.scroll-to-top');
 
-    function toggleScrollToTop() {
-        if (scrollToTopBtn) {
-            if (window.pageYOffset > 300) {
-                scrollToTopBtn.style.display = 'flex';
-            } else {
-                scrollToTopBtn.style.display = 'none';
-            }
+    let scrollTicking = false;
+    function handleScroll() {
+        if (!scrollTicking) {
+            requestAnimationFrame(() => {
+                const scrollTop = window.pageYOffset;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+                // Update progress bar
+                if (progressBar && docHeight > 0) {
+                    const scrollPercent = (scrollTop / docHeight) * 100;
+                    progressBar.style.width = scrollPercent + '%';
+                }
+
+                // Show/hide progress bar
+                if (readingProgress) {
+                    if (scrollTop > 100) {
+                        readingProgress.classList.add('visible');
+                    } else {
+                        readingProgress.classList.remove('visible');
+                    }
+                }
+
+                // Toggle scroll to top button
+                if (scrollToTopBtn) {
+                    if (scrollTop > 300) {
+                        scrollToTopBtn.style.display = 'flex';
+                    } else {
+                        scrollToTopBtn.style.display = 'none';
+                    }
+                }
+
+                scrollTicking = false;
+            });
+            scrollTicking = true;
         }
     }
+
+    // Single throttled scroll listener
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Initialize on load
+    handleScroll();
 
     function scrollToTop() {
         window.scrollTo({
@@ -424,7 +435,6 @@ function initEnhancedUX() {
     }
 
     if (scrollToTopBtn) {
-        window.addEventListener('scroll', toggleScrollToTop);
         scrollToTopBtn.addEventListener('click', scrollToTop);
     }
 

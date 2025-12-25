@@ -443,42 +443,6 @@ button {
     font-size: 1.2rem;
 }
 
-/* Hero Introduction */
-.hero-intro {
-    text-align: center;
-    padding: 4rem 2rem 1rem;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.hero-title {
-    font-size: 3.5rem;
-    font-weight: 800;
-    color: var(--text-dark);
-    margin-bottom: 1.5rem;
-    line-height: 1.1;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.hero-subtitle {
-    font-size: 1.25rem;
-    color: var(--text-light);
-    margin-bottom: 3rem;
-    line-height: 1.6;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.hero-actions {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
 
 /* Section Separator */
 .section-separator {
@@ -1396,16 +1360,9 @@ button {
     }
 
     /* Better mobile spacing */
-    .main-content {
-        padding: 0 1rem;
-    }
 
     .section {
-        padding: 3rem 0;
-    }
-
-    .section {
-        padding: 1rem;
+        padding: 1rem 0;
     }
 
     .hero-carousel {
@@ -1433,9 +1390,6 @@ button {
         width: 100%;
     }
 
-    .carousel-description {
-        font-size: 1rem;
-    }
 
     .features {
         flex-direction: column;
@@ -1509,10 +1463,6 @@ button {
         height: 8px;
     }
 
-    .carousel-description {
-        font-size: 1.2rem;
-        max-width: 100%;
-    }
 
     .feature-card {
         padding: 1.5rem;
@@ -2717,22 +2667,20 @@ input.invalid {
 .floating-btn {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 12px 20px;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 0.9rem;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     border: 2px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
-    min-width: 140px;
-    justify-content: center;
     text-decoration: none;
     color: white;
     position: relative;
     overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .floating-btn::before {
@@ -2760,13 +2708,10 @@ input.invalid {
 }
 
 .floating-icon {
-    font-size: 1.2rem;
-    flex-shrink: 0;
-}
-
-.floating-label {
-    flex: 1;
-    text-align: center;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .whatsapp-btn {
@@ -3053,18 +2998,12 @@ input.invalid {
     }
 
     .floating-btn {
-        padding: 12px 16px;
-        font-size: 0.875rem;
-        min-width: 120px;
-        min-height: 48px;
+        width: 45px;
+        height: 45px;
     }
 
     .floating-icon {
-        font-size: 1rem;
-    }
-
-    .floating-label {
-        font-size: 0.875rem;
+        font-size: 1.2rem;
     }
 
     /* Improved mobile spacing */
