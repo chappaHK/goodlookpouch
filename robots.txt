@@ -1,5 +1,5 @@
 # Robots.txt for GoodLook Pouch Website
-# https://goodlookpouch.com/robots.txt
+# https://www.goodlookpouch.com/robots.txt
 
 User-agent: *
 Allow: /
@@ -13,7 +13,7 @@ Disallow: /private/
 Disallow: /temp/
 
 # Sitemap location
-Sitemap: https://goodlookpouch.com/sitemap.xml
+Sitemap: https://www.goodlookpouch.com/sitemap.xml
 
 # Crawl delay (optional - remove if not needed)
 # Crawl-delay: 1
