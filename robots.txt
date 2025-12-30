@@ -1,0 +1,19 @@
+# Robots.txt for GoodLook Pouch Website
+# https://goodlookpouch.com/robots.txt
+
+User-agent: *
+Allow: /
+
+# Block admin section from search engines
+Disallow: /#admin
+
+# Block any potential sensitive directories (if they exist)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+
+# Sitemap location
+Sitemap: https://goodlookpouch.com/sitemap.xml
+
+# Crawl delay (optional - remove if not needed)
+# Crawl-delay: 1
