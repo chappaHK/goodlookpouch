@@ -114,9 +114,9 @@ function initCarousel() {
 // LOCALSTORAGE MANAGEMENT
 function initLocalStorage() {
     const defaultData = {
-        whatsapp: '+91 9652960041',
-        phone: '+91 9652960041',
-        email: 'chappaHemanthk@gmail.com',
+        whatsapp: '+91 9652480915',
+        phone: '+91 9652480915',
+        email: 'sales@goodlookpouch.com',
         address: 'Suchitra,Hyderabad city,Telangana 500055',
         facebook: 'https://facebook.com/goodlookpouch',
         instagram: 'https://instagram.com/goodlookpouch',
