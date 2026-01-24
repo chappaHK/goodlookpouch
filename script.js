@@ -117,13 +117,14 @@ function initLocalStorage() {
         whatsapp: '+91 9652480915',
         phone: '+91 9652480915',
         email: 'sales@goodlookpouch.com',
-        address: 'Suchitra,Hyderabad city,Telangana 500055',
+        address: 'plot 177 MN reddy nagar,Suchitra,Hyderabad city,Telangana 500064',
         facebook: 'https://facebook.com/goodlookpouch',
         instagram: 'https://instagram.com/goodlookpouch',
         linkedin: 'https://linkedin.com/company/goodlookpouch',
         youtube: 'https://youtube.com/@goodlookpouch',
         footerMessage: 'Premium pouch manufacturing with zero setup costs and fast turnaround.',
-        footerCopyright: '© 2026 GoodLook Pouch. All rights reserved.'
+        footerCopyright: '© 2026 GoodLook Pouch.',
+        footerCompany: 'SH Flexibles Private Limited. All Rights Reserved.'
     };
 
     // Load data from localStorage or use defaults
@@ -167,6 +168,7 @@ function initLocalStorage() {
         document.getElementById('footer-phone').textContent = data.phone;
         document.getElementById('footer-email').textContent = data.email;
         document.getElementById('footer-copyright').textContent = data.footerCopyright;
+        document.getElementById('footer-company').textContent = data.footerCompany;
 
         // Update social links
         document.getElementById('footer-facebook').href = data.facebook;
